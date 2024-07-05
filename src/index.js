@@ -7,7 +7,15 @@ dotenv.config({
   path: "/.env",
 });
 
-connectDB();
+connectDB()
+  .then(() => {
+    app.listen(process.env.PORT || 8080, () => {
+      console.log(`server started on ${process.env.PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("error connecting to db", err);
+  });
 
 // (async () => {
 //   try {
